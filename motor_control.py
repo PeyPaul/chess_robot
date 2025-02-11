@@ -1,18 +1,20 @@
 import serial
 import binascii
 import time
+import math
+from inverse_kinematics import inverse_kinematics
 
 def read_from_serial(ser):
     try:
         line = ser.read(size=10)
-        print(f"Read: {binascii.hexlify(line)}")
+        #print(f"Read: {binascii.hexlify(line)}")
     except serial.SerialException as e:
         print(f"Error: {e}")  
     
 def send_to_serial(ser, data):
     try:
         ser.write(data)
-        print(f"Sent: {binascii.hexlify(data)}")
+        #print(f"Sent: {binascii.hexlify(data)}")
     except serial.SerialException as e:
         print(f"Error: {e}")
 
@@ -56,18 +58,27 @@ def absolute_positioning(slave, speed, acceleration, position):
     main(command)
 
 
-def test():
-    for i in range(1,4):
+def test(x, y):
+    l1 = 2.0
+    l2 = 2.0
+    theta1, theta2 = inverse_kinematics(x, y, l1, l2)
+    theta1 = int(abs(3200*math.degrees(theta1)/360))
+    theta2 = int(abs(3200*math.degrees(theta2)/360))
+    print(f"Theta1: {theta1} steps")
+    print(f"Theta2: {theta2} steps")
+    for i in range(1,3):
         absolute_positioning(i,600,2,0)
         print(i)
     time.sleep(5)
-    for i in range(1,4):
-        absolute_positioning(i,600,2,3200) #3200 is 360°
+    absolute_positioning(1,600,2,theta1)
+    absolute_positioning(2,600,2,theta2)
+    #for i in range(1,3):
+    #    absolute_positioning(i,600,2,3200) #3200 is 360°
     time.sleep(5)
-    for i in range(1,4):
+    for i in range(1,3):
         absolute_positioning(i,600,2,0)
     
-test()
+test(1,1)
 
 
 
