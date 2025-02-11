@@ -40,3 +40,7 @@ l2 = 2.0
 theta1, theta2 = inverse_kinematics(x, y, l1, l2)
 print(f"Theta1: {math.degrees(theta1)} degrees")
 print(f"Theta2: {math.degrees(theta2)} degrees")
+
+
+
+# from my measures : l1 = 155; l2 = 135
