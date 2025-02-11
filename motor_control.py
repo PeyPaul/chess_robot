@@ -47,19 +47,35 @@ def main(command): #if __name__ == "__main__":
 # start : FA01F681F002
 # stop : FA01F6000002
 
-def absolute_positioning(speed, acceleration, position):
+def absolute_positioning(slave, speed, acceleration, position):
     speed = f"{speed:04X}"
     acceleration = f"{acceleration:02X}"
     position = f"{position:08X}"
-    command = f"FA01FE{speed}{acceleration}{position}"
+    slave = f"{slave:02X}"
+    command = f"FA{slave}FE{speed}{acceleration}{position}"
     main(command)
 
 
 def test():
-    absolute_positioning(600,2,0)
+    for i in range(1,4):
+        absolute_positioning(i,600,2,0)
+        print(i)
     time.sleep(5)
-    absolute_positioning(600,2,3200) #3200 is 360°
+    for i in range(1,4):
+        absolute_positioning(i,600,2,3200) #3200 is 360°
     time.sleep(5)
-    absolute_positioning(600,2,0)
+    for i in range(1,4):
+        absolute_positioning(i,600,2,0)
     
 test()
+
+
+
+
+
+### 3 motors ###
+
+def _3_motors_absolute_positioning(speed, acceleration, position1, position2, position3):
+    absolute_positioning(speed, acceleration, position1)
+    absolute_positioning(speed, acceleration, position2)
+    absolute_positioning(speed, acceleration, position3)
