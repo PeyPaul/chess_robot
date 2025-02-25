@@ -78,7 +78,7 @@ def test(x, y):
     for i in range(1,3):
         absolute_positioning(i,600,2,0)
     
-test(1,1)
+#test(1,1)
 
 
 

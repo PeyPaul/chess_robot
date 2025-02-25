@@ -1,6 +1,17 @@
 import math
 import matplotlib.pyplot as plt
 
+
+## Example usage
+#x = 200
+#y = 100
+#l1 = 155
+#l2 = 135
+## from my measures : l1 = 155; l2 = 135
+
+
+
+
 def inverse_kinematics(x, y, l1, l2):
     """
     Calculate the inverse kinematics for a 2-link robotic arm.
@@ -56,13 +67,4 @@ def visualize():
     plt.title("2-Link Robotic Arm Visualization")
     plt.show()
 
-visualize()
-
-
-
-# Example usage
-x = 200
-y = 100
-l1 = 155
-l2 = 135
-# from my measures : l1 = 155; l2 = 135
+#visualize()
