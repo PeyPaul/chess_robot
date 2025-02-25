@@ -3,6 +3,7 @@ import binascii
 import time
 import math
 from inverse_kinematics import inverse_kinematics
+import hyperparameters as hp
 
 def read_from_serial(ser):
     try:
@@ -80,8 +81,10 @@ def test(x, y):
     
 #test(1,1)
 
-
-
+absolute_positioning(1,600,2,0)
+time.sleep(3)
+absolute_positioning(1,600,2,int(3200*20/360*hp.gear_ratio))
+time.sleep(3)
 
 
 ### 3 motors ###
