@@ -22,3 +22,9 @@ gear_ratio = 47/19
 
 
 # 75 degree seems to be the max for motor 1
+
+# regarding the position of the arm relative to the board
+
+distance_to_board = 400
+case_width = 57.5
+height = 100

@@ -100,6 +100,9 @@ time.sleep(3)
 test(200,100)
 
 
+def move_arm(x, y, z): # we will need to work on this function
+    pass
+
 
 ### 3 motors ###
 
