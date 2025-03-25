@@ -4,14 +4,11 @@ import hyperparameters as hp
 
 
 ## Example usage
-#x = 200
-#y = 100
-#l1 = 155
-#l2 = 135
+#x = 139
+#y = 129
+#l1 = 129
+#l2 = 139
 ## from my measures : l1 = 155; l2 = 135
-
-
-
 
 def inverse_kinematics(x, y, l1, l2):
     """
@@ -26,39 +23,42 @@ def inverse_kinematics(x, y, l1, l2):
     Returns:
     tuple: The angles (theta1, theta2) in radians.
     """
-    # Calculate the distance from the base to the end effector
+# Calculate the distance from the base to the end effector
     r = math.sqrt(x**2 + y**2)
-    
+
     # Check if the point is reachable
     if r > (l1 + l2) or r < abs(l1 - l2):
         raise ValueError("The point is not reachable.")
-    
+
     # Calculate the angle for the second joint
     cos_theta2 = (x**2 + y**2 - l1**2 - l2**2) / (2 * l1 * l2)
-    theta2 = -math.acos(cos_theta2)
-    
+    theta2 = math.acos(cos_theta2)
+
     # Calculate the angle for the first joint
     k1 = l1 + l2 * cos_theta2
-    k2 = l2 * math.sin(theta2)
+    k2 = l2 * math.sin(-theta2)
     theta1 = math.atan2(y, x) - math.atan2(k2, k1)
-    
+
     return theta1, theta2
 
 
 # let's try to visualize the result on a chart
-def visualize():
-    theta1, theta2 = inverse_kinematics(x, y, l1, l2)
+def visualize(theta1, theta2):
     print(f"Theta1: {math.degrees(theta1)} degrees")
     print(f"Theta2: {math.degrees(theta2)} degrees")
-    # Compute joint positions
+
+    # Joint 1 (base to link 1 end)
     joint1_x = l1 * math.cos(theta1)
     joint1_y = l1 * math.sin(theta1)
-    joint2_x = joint1_x + l2 * math.cos(theta1 + theta2)
-    joint2_y = joint1_y + l2 * math.sin(theta1 + theta2)
+
+    # Joint 2 (link 1 end to link 2 end)
+    joint2_x = joint1_x + l2 * math.cos(theta1 - theta2)
+    joint2_y = joint1_y + l2 * math.sin(theta1 - theta2)
 
     # Plot the arm
     plt.figure(figsize=(5, 5))
     plt.plot([0, joint1_x, joint2_x], [0, joint1_y, joint2_y], 'o-', markersize=8, linewidth=3, label='Arm')
+    plt.scatter([x], [y], color='red', label='Target', zorder=5)  # Plot the target point
     plt.xlim(-l1-l2, l1+l2)
     plt.ylim(-l1-l2, l1+l2)
     plt.axhline(0, color='black', linewidth=0.5)
@@ -68,4 +68,10 @@ def visualize():
     plt.title("2-Link Robotic Arm Visualization")
     plt.show()
 
-#visualize()
+    # Check end effector position
+    print(f"Joint 2 position: ({joint2_x}, {joint2_y})")
+    L = math.sqrt(joint2_x**2 + joint2_y**2)
+    print(f"Computed Length: {L}")
+
+#theta1, theta2 = inverse_kinematics(x, y, l1, l2)
+#visualize(theta1, theta2)

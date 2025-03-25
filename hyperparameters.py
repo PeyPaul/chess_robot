@@ -8,8 +8,8 @@ baudrate = 38400
 
 
 # from my measures : l1 = 155; l2 = 135
-l1 = 155
-l2 = 135
+l1 = 129
+l2 = 139
 
 
 
@@ -17,3 +17,8 @@ l2 = 135
 #small gers are 19
 #big gears are 47
 gear_ratio = 47/19
+
+
+
+
+# 75 degree seems to be the max for motor 1
