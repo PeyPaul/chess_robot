@@ -18,6 +18,10 @@ l2 = 139
 #big gears are 47
 gear_ratio = 47/19
 
+gear_ratio_base = 3 # WE NEED TO COMPUTE THAT LATER
+
+# gear ratio = 5.1 according to the datasheet
+
 
 
 
@@ -27,4 +31,14 @@ gear_ratio = 47/19
 
 distance_to_board = 400
 case_width = 57.5
-height = 100
+
+height_movement = 230 # height of the arm when it is moving
+
+height_above_piece = 33
+
+piece_heigth = {'pawn': 44, 'rook': 46, 'knight': 57, 'bishop': 67, 'queen': 81, 'king': 94}
+
+discard_position = "j4" # position where we put the pieces we don't want anymore
+
+
+home_position = (0,200,200) # home position of the arm (x,y,z) in mm

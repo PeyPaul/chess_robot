@@ -7,6 +7,7 @@ import hyperparameters as hp
 
 theta10 = 26
 theta20 = 21
+theta30 = 0
 
 def read_from_serial(ser):
     try:
@@ -90,19 +91,46 @@ def test(x,y):
 
 
 
-
-test(200,0)
-time.sleep(3)
-test(100,0)
-time.sleep(3)
-test(100,100)
-time.sleep(3)
-test(200,100)
+#test(200,0)
+#time.sleep(3)
+#test(100,0)
+#time.sleep(3)
+#test(100,100)
+#time.sleep(3)
+#test(200,100)
 
 
 def move_arm(x, y, z): # we will need to work on this function
-    pass
+    
+    theta3 = math.atan2(x,y)
+    theta3 = math.degrees(theta3)
+    
+    r = math.sqrt(x**2 + y**2)
+    
+    theta1, theta2 = inverse_kinematics(r, z, hp.l1, hp.l2)
 
+    theta1 = math.degrees(theta1)
+    theta2 = math.degrees(theta2)
+    
+    theta2 = theta2 - theta1
+
+    theta1 = theta1 - theta10
+    theta2 = theta2 - theta20
+    theta3 = theta3 - theta30
+
+    print("theta1", theta1)
+    print("theta2", theta2)
+    print("theta3", theta3)
+
+    theta1 = int(3200*theta1/360)
+    theta2 = int(3200*theta2/360)
+    theta3 = int(3200*theta3/360)
+    
+    absolute_positioning(1,600,2,int(theta1*hp.gear_ratio))
+    absolute_positioning(2,600,2,int(theta2*hp.gear_ratio))
+    absolute_positioning(3,600,2,int(theta3*hp.gear_ratio_base))
+
+move_arm(100,100,100)
 
 ### 3 motors ###
 

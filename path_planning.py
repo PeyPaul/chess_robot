@@ -13,21 +13,30 @@ def position_to_coordinates(position: str, color = "w"): # DO NOT USE CAPITAL LE
     
 #print(position_to_coordinates("g7", "b"))
 
-def path_planning(start_position: str, end_position: str): # HARDCODE PIECE4S HEIGHT
+def path_planning(start_position: str, end_position: str, piece_move: str):
     x_start, y_start = position_to_coordinates(start_position)
     x_end, y_end = position_to_coordinates(end_position)
+    pick_up_height = hp.piece_heigth[piece_move] + hp.height_above_piece
     
-    move_arm(x_start, y_start, hp.height)
-    move_arm(x_start, y_start, 0)
+    move_arm(x_start, y_start, hp.height_movement)
+    move_arm(x_start, y_start, pick_up_height)
     # grab piece
-    move_arm(x_start, y_start, hp.height)
+    move_arm(x_start, y_start, hp.height_movement)
     
-    move_arm(x_end, y_end, hp.height)
-    move_arm(x_end, y_end, 0)
+    move_arm(x_end, y_end, hp.height_movement)
+    move_arm(x_end, y_end, pick_up_height)
     # release piece
-    move_arm(x_end, y_end, hp.height)
+    move_arm(x_end, y_end, hp.height_movement)
     
     # go home position
+    x,y,z = hp.home_position
+    move_arm(x, y, z)
     pass
 
 path_planning("g7", "g6")
+
+def play(start_position: str, end_position: str, piece_move: str, capture: bool = False, piece_captured: str = None):
+    if capture:
+        path_planning(end_position, hp.discard_position, piece_captured)
+    path_planning(start_position, end_position, piece_move)
+    pass
