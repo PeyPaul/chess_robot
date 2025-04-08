@@ -8,17 +8,21 @@ baudrate = 38400
 
 
 # from my measures : l1 = 155; l2 = 135
-l1 = 129
-l2 = 139
+# old
+# l1 = 129
+# l2 = 139
 
+l1 = 182
+l2 = 188
 
 
 
 #small gers are 19
 #big gears are 47
-gear_ratio = 47/19
+# gear_ratio = 47/19 OLD
+gear_ratio = 5.1
 
-gear_ratio_base = 3 # WE NEED TO COMPUTE THAT LATER
+gear_ratio_base = 5.1 # WE NEED TO COMPUTE THAT LATER
 
 # gear ratio = 5.1 according to the datasheet
 

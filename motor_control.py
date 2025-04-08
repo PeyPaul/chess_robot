@@ -5,8 +5,12 @@ import math
 from inverse_kinematics import inverse_kinematics
 import hyperparameters as hp
 
-theta10 = 26
-theta20 = 21
+# theta10 = 26
+# theta20 = 21
+# theta30 = 0
+
+theta10 = 145
+theta20 = -26
 theta30 = 0
 
 def read_from_serial(ser):
@@ -50,6 +54,13 @@ def main(command: str):
     send_to_serial(ser, data)
     read_from_serial(ser)
     ser.close()
+    
+main("FA019400000000010320")
+main("FA029400000000010320")
+main("FA039400000000010320")
+main("FA0191")
+main("FA0291")
+main("FA0391")
 
 # start : FA01F681F002
 # stop : FA01F6000002
@@ -85,11 +96,21 @@ def test(x,y):
     theta1 = int(3200*theta1/360)
     theta2 = int(3200*theta2/360)
     
-    absolute_positioning(1,600,2,int(theta1*hp.gear_ratio))
-    absolute_positioning(2,600,2,int(theta2*hp.gear_ratio))
+    absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
+    absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
 
 
 
+# time.sleep(3)
+# test(250,-50)
+# time.sleep(3)
+# test(250+hp.case_width,-50)
+# time.sleep(3)
+# test(250+hp.case_width,0)
+# time.sleep(3)
+# test(250,0)
+# time.sleep(3)
+# test(250,-50)
 
 #test(200,0)
 #time.sleep(3)
@@ -130,15 +151,11 @@ def move_arm(x, y, z): # we will need to work on this function
     absolute_positioning(2,600,2,int(theta2*hp.gear_ratio))
     absolute_positioning(3,600,2,int(theta3*hp.gear_ratio_base))
 
-move_arm(100,100,100)
+# move_arm(200,200,200)
+# time.sleep(1)
+# move_arm(150,100,-200)
 
-### 3 motors ###
-
-def _3_motors_absolute_positioning(speed, acceleration, position1, position2, position3):
-    absolute_positioning(speed, acceleration, position1)
-    absolute_positioning(speed, acceleration, position2)
-    absolute_positioning(speed, acceleration, position3)
-    
+   
     
     
 def test2(x, y):
