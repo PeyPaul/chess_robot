@@ -55,12 +55,14 @@ def main(command: str):
     read_from_serial(ser)
     ser.close()
     
-main("FA019400000000010320")
-main("FA029400000000010320")
-main("FA039400000000010320")
-main("FA0191")
-main("FA0291")
-main("FA0391")
+    
+if __name__ == "__main__":
+    main("FA019400000000010320")
+    main("FA029400000000010320")
+    main("FA039400000000010320")
+    main("FA0191")
+    main("FA0291")
+    main("FA0391")
 
 # start : FA01F681F002
 # stop : FA01F6000002
