@@ -1,15 +1,9 @@
-#from motor_control import test, theta10, theta20
+from motor_control import test, theta10, theta20
 import matplotlib.pyplot as plt
 from matplotlib.backend_bases import MouseButton
 import tkinter as tk
 from tkinter import messagebox
 import os
-
-
-def test(x, y):
-    print(f"Test launched for : ({x}, {y})")
-    pass
-
 
 def load_map(filename="map.txt"):
     points = []
