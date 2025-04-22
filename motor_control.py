@@ -56,13 +56,20 @@ def main(command: str):
     ser.close()
     
     
-if __name__ == "__main__":
-    main("FA019400000000010320")
-    main("FA029400000000010320")
-    main("FA039400000000010320")
-    main("FA0191")
-    main("FA0291")
-    main("FA0391")
+
+main("FA019400000000010320")
+main("FA029400000000010320")
+main("FA039400000000010320")
+
+main("FA01830BB8")
+main("FA02830BB8")
+#main("FA03830BB8")
+
+main("FA0191")
+main("FA0291")
+#main("FA0391")
+
+
 
 # start : FA01F681F002
 # stop : FA01F6000002
@@ -102,18 +109,24 @@ def test(x,y):
     absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
 
 
+#time.sleep(5)
+#test(200,200)
+#time.sleep(10)
+#test(250,200)
+#time.sleep(3)
 
-# time.sleep(3)
-# test(250,-50)
-# time.sleep(3)
-# test(250+hp.case_width,-50)
-# time.sleep(3)
-# test(250+hp.case_width,0)
-# time.sleep(3)
-# test(250,0)
-# time.sleep(3)
-# test(250,-50)
+#time.sleep(3)
+#test(250,-50)
+#time.sleep(3)
+#test(250+hp.case_width,-50)
+#time.sleep(3)
+#test(250+hp.case_width,0)
+#time.sleep(3)
+#test(250,0)
+#time.sleep(3)
+#test(250,-50)
 
+#time.sleep(3)
 #test(200,0)
 #time.sleep(3)
 #test(100,0)
@@ -121,6 +134,7 @@ def test(x,y):
 #test(100,100)
 #time.sleep(3)
 #test(200,100)
+#time.sleep(3)
 
 
 def move_arm(x, y, z): # we will need to work on this function
