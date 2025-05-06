@@ -4,10 +4,10 @@ import hyperparameters as hp
 
 
 ## Example usage
-#x = 139
-#y = 129
-#l1 = 129
-#l2 = 139
+x = 700
+y = 200
+l1 = 490
+l2 = 475
 ## from my measures : l1 = 155; l2 = 135
 
 def inverse_kinematics(x, y, l1, l2):
@@ -73,5 +73,5 @@ def visualize(theta1, theta2):
     L = math.sqrt(joint2_x**2 + joint2_y**2)
     print(f"Computed Length: {L}")
 
-#theta1, theta2 = inverse_kinematics(x, y, l1, l2)
-#visualize(theta1, theta2)
+# theta1, theta2 = inverse_kinematics(x, y, hp.l1, hp.l2)
+# visualize(theta1, theta2)

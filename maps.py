@@ -13,7 +13,6 @@ def load_map(filename="map.txt"):
                 x, y, status = line.strip().split(',')
                 points.append((float(x), float(y), status))
     return points
-
 def save_point(x, y, status, filename="map.txt"):
     with open(filename, "a") as f:
         f.write(f"{x},{y},{status}\n")

@@ -4,13 +4,14 @@ import time
 import math
 from inverse_kinematics import inverse_kinematics
 import hyperparameters as hp
+from jonas import jonas_inverse_kinematics
 
 # theta10 = 26
 # theta20 = 21
 # theta30 = 0
 
-theta10 = 145
-theta20 = -26
+theta10 = 146
+theta20 = -14
 theta30 = 0
 
 def read_from_serial(ser):
@@ -88,6 +89,9 @@ def test(x,y):
 
     theta1, theta2 = inverse_kinematics(x, y, hp.l1, hp.l2)
 
+    print(f"Theta1: {math.degrees(theta1)} degrees")
+    print(f"Theta2: {math.degrees(theta2)} degrees")
+    
     theta1 = math.degrees(theta1)
     theta2 = math.degrees(theta2)
     
@@ -107,6 +111,38 @@ def test(x,y):
     
     absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
     absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
+
+
+# for j in range(0,4):
+#     for i in range(0,5):
+#         time.sleep(3)
+#         test(200+50*i,200+50*j)
+#         time.sleep(3)
+
+def jonas(x,y):
+    theta1, theta2 = jonas_inverse_kinematics(hp.l1, hp.l2, x,y)
+    
+    print(f"Theta1: {theta1} degrees")
+    print(f"Theta2: {theta2} degrees")
+
+    theta1 = theta1 - theta10
+    theta2 = theta2 - theta20
+    
+    theta2 = theta2 / 1.38
+
+    print("theta1", theta1)
+    print("theta2", theta2)
+
+    theta1 = int(3200*theta1/360)
+    theta2 = int(3200*theta2/360)
+    
+    absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
+    absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
+
+
+time.sleep(3)
+jonas(800,0)
+time.sleep(3)
 
 
 #time.sleep(5)
