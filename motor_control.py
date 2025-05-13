@@ -139,11 +139,12 @@ def jonas(x,y):
     absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
     absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
 
+values = [(412, 267),(537, 398),(689, 231),(476, 382),(621, 215),(459, 349),(703, 299),(528, 206),(641, 390),(400,400)]
 
-time.sleep(3)
-jonas(800,0)
-time.sleep(3)
-
+for i in range(len(values)):
+    time.sleep
+    jonas(values[i][0], values[i][1])
+    time.sleep(3)
 
 #time.sleep(5)
 #test(200,200)
