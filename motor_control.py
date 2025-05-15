@@ -57,18 +57,18 @@ def main(command: str):
     ser.close()
     
     
+def homing():
+    main("FA019400000000010320")
+    main("FA029400000000010320")
+    main("FA039400000000010320")
 
-main("FA019400000000010320")
-main("FA029400000000010320")
-main("FA039400000000010320")
+    main("FA01830BB8")
+    main("FA02830BB8")
+    #main("FA03830BB8")
 
-main("FA01830BB8")
-main("FA02830BB8")
-#main("FA03830BB8")
-
-main("FA0191")
-main("FA0291")
-#main("FA0391")
+    main("FA0191")
+    main("FA0291")
+    #main("FA0391")
 
 
 
@@ -112,13 +112,6 @@ def test(x,y):
     absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
     absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
 
-
-# for j in range(0,4):
-#     for i in range(0,5):
-#         time.sleep(3)
-#         test(200+50*i,200+50*j)
-#         time.sleep(3)
-
 def jonas(x,y):
     theta1, theta2 = jonas_inverse_kinematics(hp.l1, hp.l2, x,y)
     
@@ -126,52 +119,48 @@ def jonas(x,y):
     print(f"Theta2: {theta2} degrees")
 
     theta1 = theta1 - theta10
-    theta2 = theta2 - theta20
+    theta2 = theta2 - theta20 
     
     theta2 = theta2 / 1.38
 
     print("theta1", theta1)
     print("theta2", theta2)
 
-    theta1 = int(3200*theta1/360)
-    theta2 = int(3200*theta2/360)
+    theta1 = int(3200*theta1/360) +10
+    theta2 = int(3200*theta2/360)-10
     
     absolute_positioning(1,600,2,-int(theta1*hp.gear_ratio))
     absolute_positioning(2,600,2,-int(theta2*hp.gear_ratio))
 
-values = [(412, 267),(537, 398),(689, 231),(476, 382),(621, 215),(459, 349),(703, 299),(528, 206),(641, 390),(400,400)]
 
-for i in range(len(values)):
-    time.sleep
-    jonas(values[i][0], values[i][1])
+def demo_1():
+    homing()
+
     time.sleep(3)
+    jonas(400, 50)
+    time.sleep(3)
+    jonas(400, 300)
 
-#time.sleep(5)
-#test(200,200)
-#time.sleep(10)
-#test(250,200)
-#time.sleep(3)
+    time.sleep(1.5)
+    jonas(700, 200)
+    time.sleep(3)
+    jonas(400, 400)
+    time.sleep(1.5)
 
-#time.sleep(3)
-#test(250,-50)
-#time.sleep(3)
-#test(250+hp.case_width,-50)
-#time.sleep(3)
-#test(250+hp.case_width,0)
-#time.sleep(3)
-#test(250,0)
-#time.sleep(3)
-#test(250,-50)
+    homing()
 
-#time.sleep(3)
-#test(200,0)
-#time.sleep(3)
-#test(100,0)
-#time.sleep(3)
-#test(100,100)
-#time.sleep(3)
-#test(200,100)
-#time.sleep(3)
+
+def horse_pick():
+    homing()
+    time.sleep(3)
+    for i in range(0,20):
+        jonas(400,200)
+        time.sleep(1.5)
+        jonas(400, 15)
+        time.sleep(3)
+    jonas(400, 400)
+    
+horse_pick()
 
 
 def move_arm(x, y, z): # we will need to work on this function
