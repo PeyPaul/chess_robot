@@ -10,7 +10,7 @@ l1 = 490
 l2 = 475
 ## from my measures : l1 = 155; l2 = 135
 
-def inverse_kinematics(x, y, l1, l2):
+def paul_inverse_kinematics(x, y, l1, l2):
     """
     Calculate the inverse kinematics for a 2-link robotic arm.
 
@@ -73,5 +73,7 @@ def visualize(theta1, theta2):
     L = math.sqrt(joint2_x**2 + joint2_y**2)
     print(f"Computed Length: {L}")
 
-# theta1, theta2 = inverse_kinematics(x, y, hp.l1, hp.l2)
-# visualize(theta1, theta2)
+
+if __name__ == "__main__":
+    theta1, theta2 = paul_inverse_kinematics(x, y, hp.l1, hp.l2)
+    visualize(theta1, theta2)

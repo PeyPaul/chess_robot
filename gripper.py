@@ -27,7 +27,13 @@ def send_angle(angle):
     arduino.write(angle_str.encode('utf-8'))
 
 def open_gripper():
+    user_input = input("Press Enter").lower()
+    if user_input == "s":
+        exit()
     send_angle(160)
 
 def close_gripper():
+    user_input = input("Press Enter").lower()
+    if user_input == "s":
+        exit()
     send_angle(90)
